@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PMP Crash Course — Andy's Weak Areas</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #222536;
+    --border: #2e3150;
+    --accent: #6c63ff;
+    --accent2: #f7931e;
+    --accent3: #00c9a7;
+    --red: #ff4d6d;
+    --yellow: #ffd166;
+    --text: #e8eaf6;
+    --muted: #8b90b8;
+    --green: #06d6a0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  header {
+    background: linear-gradient(135deg, #1a1d27 0%, #12142a 100%);
+    border-bottom: 2px solid var(--accent);
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  header h1 { font-size: 1.5rem; color: var(--accent); letter-spacing: 0.02em; }
+  header p { color: var(--muted); font-size: 0.9rem; }
+  .exam-badge {
+    background: var(--red);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.7} }
+
+.priority-bar {
+display: flex;
+gap: 12px;
+padding: 16px 32px;
+background: var(–surface);
+border-bottom: 1px solid var(–border);
+flex-wrap: wrap;
+}
+.pill {
+padding: 5px 14px;
+border-radius: 20px;
+font-size: 0.8rem;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.2s;
+border: 2px solid transparent;
+}
+.pill:hover { transform: translateY(-1px); }
+.pill.active { border-color: white; }
+.pill-red { background: rgba(255,77,109,0.2); color: var(–red); }
+.pill-orange { background: rgba(247,147,30,0.2); color: var(–accent2); }
+.pill-blue { background: rgba(108,99,255,0.2); color: var(–accent); }
+.pill-green { background: rgba(6,214,160,0.2); color: var(–green); }
+.pill-yellow { background: rgba(255,209,102,0.2); color: var(–yellow); }
+
+main { max-width: 1100px; margin: 0 auto; padding: 28px 24px; }
+
+.section-label {
+font-size: 0.7rem;
+letter-spacing: 0.12em;
+text-transform: uppercase;
+color: var(–muted);
+margin-bottom: 12px;
+margin-top: 32px;
+}
+
+.card {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 12px;
+padding: 20px 24px;
+margin-bottom: 16px;
+transition: border-color 0.2s;
+}
+.card:hover { border-color: var(–accent); }
+
+.card-header {
+display: flex;
+align-items: center;
+gap: 12px;
+margin-bottom: 14px;
+flex-wrap: wrap;
+}
+.card-title {
+font-size: 1.05rem;
+font-weight: 700;
+flex: 1;
+}
+.badge {
+padding: 3px 10px;
+border-radius: 8px;
+font-size: 0.72rem;
+font-weight: 600;
+}
+.badge-red { background: rgba(255,77,109,0.15); color: var(–red); }
+.badge-orange { background: rgba(247,147,30,0.15); color: var(–accent2); }
+.badge-purple { background: rgba(108,99,255,0.15); color: var(–accent); }
+.badge-green { background: rgba(6,214,160,0.15); color: var(–green); }
+.badge-teal { background: rgba(0,201,167,0.15); color: var(–accent3); }
+
+.stat-row {
+display: flex;
+gap: 8px;
+margin-bottom: 12px;
+flex-wrap: wrap;
+}
+.stat {
+background: var(–surface2);
+border-radius: 8px;
+padding: 4px 10px;
+font-size: 0.78rem;
+color: var(–muted);
+}
+.stat strong { color: var(–text); }
+
+details { margin-top: 10px; }
+summary {
+cursor: pointer;
+color: var(–accent);
+font-size: 0.85rem;
+font-weight: 600;
+list-style: none;
+display: flex;
+align-items: center;
+gap: 6px;
+user-select: none;
+}
+summary::before { content: ‘▶’; font-size: 0.7rem; transition: transform 0.2s; }
+details[open] summary::before { transform: rotate(90deg); }
+summary::-webkit-details-marker { display: none; }
+
+.detail-body {
+margin-top: 12px;
+padding-top: 12px;
+border-top: 1px solid var(–border);
+}
+
+.concept-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+gap: 10px;
+margin-top: 10px;
+}
+.concept-item {
+background: var(–surface2);
+border-radius: 8px;
+padding: 10px 14px;
+font-size: 0.82rem;
+}
+.concept-item .label {
+font-weight: 700;
+color: var(–accent3);
+font-size: 0.75rem;
+text-transform: uppercase;
+letter-spacing: 0.06em;
+margin-bottom: 4px;
+}
+
+.trap-list, .key-list {
+list-style: none;
+margin-top: 8px;
+}
+.trap-list li, .key-list li {
+padding: 6px 0;
+padding-left: 20px;
+position: relative;
+font-size: 0.87rem;
+border-bottom: 1px solid var(–border);
+}
+.trap-list li:last-child, .key-list li:last-child { border-bottom: none; }
+.trap-list li::before { content: ‘⚠’; position: absolute; left: 0; color: var(–yellow); }
+.key-list li::before { content: ‘→’; position: absolute; left: 0; color: var(–accent3); }
+
+.formula-box {
+background: #12142a;
+border: 1px solid var(–accent);
+border-radius: 8px;
+padding: 12px 16px;
+font-family: ‘Courier New’, monospace;
+font-size: 0.85rem;
+margin: 10px 0;
+color: var(–accent3);
+}
+.formula-box .label {
+color: var(–muted);
+font-size: 0.75rem;
+font-family: inherit;
+margin-bottom: 4px;
+}
+
+.mini-quiz {
+background: var(–surface2);
+border-radius: 10px;
+padding: 14px;
+margin-top: 12px;
+}
+.mini-quiz .q { font-weight: 600; font-size: 0.88rem; margin-bottom: 10px; }
+.mini-quiz .options { display: flex; flex-direction: column; gap: 6px; }
+.mini-quiz .option {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 6px;
+padding: 7px 12px;
+font-size: 0.82rem;
+cursor: pointer;
+transition: all 0.2s;
+}
+.mini-quiz .option:hover { border-color: var(–accent); }
+.mini-quiz .option.correct { border-color: var(–green); background: rgba(6,214,160,0.1); color: var(–green); }
+.mini-quiz .option.wrong { border-color: var(–red); background: rgba(255,77,109,0.1); color: var(–red); }
+.mini-quiz .explanation {
+margin-top: 10px;
+font-size: 0.8rem;
+color: var(–muted);
+display: none;
+padding: 8px;
+background: var(–surface);
+border-radius: 6px;
+border-left: 3px solid var(–accent3);
+}
+
+.priority-heat {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+gap: 10px;
+margin-top: 12px;
+}
+.heat-cell {
+border-radius: 10px;
+padding: 14px;
+text-align: center;
+}
+.heat-cell .count { font-size: 2rem; font-weight: 900; line-height: 1; }
+.heat-cell .topic { font-size: 0.78rem; color: var(–muted); margin-top: 4px; }
+.heat-5 { background: rgba(255,77,109,0.2); }
+.heat-5 .count { color: var(–red); }
+.heat-4 { background: rgba(247,147,30,0.15); }
+.heat-4 .count { color: var(–accent2); }
+.heat-3 { background: rgba(255,209,102,0.12); }
+.heat-3 .count { color: var(–yellow); }
+.heat-2 { background: rgba(108,99,255,0.12); }
+.heat-2 .count { color: var(–accent); }
+.heat-1 { background: rgba(6,214,160,0.1); }
+.heat-1 .count { color: var(–green); }
+
+.timeline {
+display: flex;
+flex-direction: column;
+gap: 0;
+margin-top: 12px;
+position: relative;
+}
+.timeline::before {
+content: ‘’;
+position: absolute;
+left: 16px;
+top: 0;
+bottom: 0;
+width: 2px;
+background: var(–border);
+}
+.timeline-item {
+display: flex;
+gap: 16px;
+padding: 10px 0;
+padding-left: 40px;
+position: relative;
+}
+.timeline-item::before {
+content: ‘’;
+position: absolute;
+left: 10px;
+top: 18px;
+width: 14px;
+height: 14px;
+border-radius: 50%;
+border: 2px solid var(–accent);
+background: var(–bg);
+}
+.timeline-item.done::before { background: var(–green); border-color: var(–green); }
+.timeline-time { color: var(–accent2); font-weight: 700; font-size: 0.82rem; white-space: nowrap; min-width: 60px; }
+.timeline-content { font-size: 0.85rem; }
+.timeline-content strong { color: var(–text); }
+.timeline-content p { color: var(–muted); font-size: 0.8rem; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media(max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+
+hr { border: none; border-top: 1px solid var(–border); margin: 24px 0; }
+
+.mindset-box {
+background: linear-gradient(135deg, rgba(108,99,255,0.15), rgba(0,201,167,0.1));
+border: 1px solid var(–accent);
+border-radius: 12px;
+padding: 16px 20px;
+margin-bottom: 16px;
+}
+.mindset-box h3 { color: var(–accent); margin-bottom: 8px; }
+</style>
+
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>⚡ PMP Crash Course — Priority Review</h1>
+    <p>Based on 80 missed questions · Exam in 2 days</p>
+  </div>
+  <div class="exam-badge">📅 EXAM: March 25</div>
+</header>
+
+<div class="priority-bar">
+  <span class="pill pill-red active">🔴 Resource (25 Qs)</span>
+  <span class="pill pill-orange">🟠 Integration (12 Qs)</span>
+  <span class="pill pill-yellow">🟡 Cost EVM (8 Qs)</span>
+  <span class="pill pill-blue">🔵 Agile Planning (7 Qs)</span>
+  <span class="pill pill-green">🟢 Comms / Procurement (4 Qs each)</span>
+</div>
+
+<main>
+
+  <!-- HEAT MAP -->
+
+  <div class="section-label">📊 Your Miss Heat Map</div>
+  <div class="priority-heat">
+    <div class="heat-cell heat-5"><div class="count">25</div><div class="topic">Resource<br>(People/Executing)</div></div>
+    <div class="heat-cell heat-4"><div class="count">12</div><div class="topic">Integration<br>(Agile/Hybrid)</div></div>
+    <div class="heat-cell heat-4"><div class="count">8</div><div class="topic">Cost / EVM<br>(Predictive)</div></div>
+    <div class="heat-cell heat-3"><div class="count">7</div><div class="topic">Agile<br>Schedule/Scope</div></div>
+    <div class="heat-cell heat-2"><div class="count">4</div><div class="topic">Communications<br>(Predictive)</div></div>
+    <div class="heat-cell heat-2"><div class="count">4</div><div class="topic">Procurement<br>(Predictive)</div></div>
+    <div class="heat-cell heat-1"><div class="count">4</div><div class="topic">Risk<br>(Agile/Hybrid)</div></div>
+    <div class="heat-cell heat-1"><div class="count">4</div><div class="topic">Scope<br>(Agile/Predictive)</div></div>
+    <div class="heat-cell heat-1"><div class="count">4</div><div class="topic">Quality<br>(Agile/Hybrid)</div></div>
+    <div class="heat-cell heat-1"><div class="count">4</div><div class="topic">Foundations<br>(Initiating)</div></div>
+  </div>
+
+  <div class="mindset-box" style="margin-top:24px">
+    <h3>🎯 Exam Mindset Shift — Before Reading Anything Else</h3>
+    <p style="font-size:0.87rem;color:var(--muted)">The PMP is not a knowledge test — it's a <strong style="color:var(--text)">judgment test</strong>. Most of your misses in Resource and Integration are likely because you picked what's <em>technically correct</em> instead of what a <strong style="color:var(--text)">senior PM would do first</strong>. The exam rewards: <strong style="color:var(--text)">proactive over reactive · people before process · communicate before escalate · servant leadership over authority</strong>.</p>
+  </div>
+
+  <!-- TOPIC 1: RESOURCE -->
+
+  <div class="section-label">🔴 PRIORITY 1 — RESOURCE (25 Misses · People Domain · Executing)</div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Resource Management Deep Dive</div>
+      <span class="badge badge-red">25 MISSES</span>
+      <span class="badge badge-orange">People Domain</span>
+      <span class="badge badge-purple">Predictive + Agile + Hybrid</span>
+    </div>
+    <div class="stat-row">
+      <div class="stat">Qs: 2, 22, 28, 35, 52, 57, 73, 74, 76, 77, 79, 83, 90, 96, 104, 106, 107, 113, 125, 130, 131, 133, 141, 165</div>
+    </div>
+
+```
+<p style="font-size:0.87rem;color:var(--muted);margin-bottom:12px">Your single biggest gap. Spans <strong style="color:var(--text)">leadership styles, conflict resolution, team motivation, servant leadership, and agile team dynamics</strong>. Many of these are situational "what do you do FIRST" questions.</p>
+
+<details>
+  <summary>Conflict Resolution — The Hierarchy You Must Know</summary>
+  <div class="detail-body">
+    <p style="font-size:0.85rem;margin-bottom:10px;">The PMI-preferred conflict resolution technique depends on the situation. Memorize this priority order:</p>
+    <div class="concept-grid">
+      <div class="concept-item">
+        <div class="label">1st Choice Always</div>
+        Collaborate / Problem Solve — find a win-win. PMI loves this.
+      </div>
+      <div class="concept-item">
+        <div class="label">When time is short</div>
+        Compromise / Reconcile — both sides give something up.
+      </div>
+      <div class="concept-item">
+        <div class="label">When issue is minor</div>
+        Smooth / Accommodate — acknowledge disagreement, downplay it.
+      </div>
+      <div class="concept-item">
+        <div class="label">Temporary relief only</div>
+        Withdraw / Avoid — never first choice, never a solution.
+      </div>
+      <div class="concept-item">
+        <div class="label">Last resort</div>
+        Force / Direct — lose-lose for relationship. Only when critical deadline.
+      </div>
+    </div>
+    <ul class="trap-list" style="margin-top:12px">
+      <li>The exam often makes "force" sound urgent and reasonable — it's almost never right</li>
+      <li>If the question says "the project manager has authority" — still pick collaborate first</li>
+      <li>Smoothing ≠ ignoring — it's acknowledging then de-emphasizing</li>
+    </ul>
+  </div>
+</details>
+
+<details>
+  <summary>Leadership Styles — Situational Leadership</summary>
+  <div class="detail-body">
+    <div class="concept-grid">
+      <div class="concept-item">
+        <div class="label">Directing</div>
+        Low skill/low will. Tell them exactly what to do. New team members.
+      </div>
+      <div class="concept-item">
+        <div class="label">Coaching</div>
+        High will/low skill. Explain and encourage. Person is motivated but inexperienced.
+      </div>
+      <div class="concept-item">
+        <div class="label">Supporting</div>
+        High skill/low will. Share decisions, boost motivation. Experienced but disengaged.
+      </div>
+      <div class="concept-item">
+        <div class="label">Delegating</div>
+        High skill/high will. Step back. Fully capable team member.
+      </div>
+      <div class="concept-item">
+        <div class="label">Servant Leader</div>
+        Agile default. Remove impediments. Focus on team needs. NOT passive.
+      </div>
+      <div class="concept-item">
+        <div class="label">Laissez-Faire</div>
+        Hands-off. Good for expert teams. PMI treats this carefully — not always negative.
+      </div>
+    </div>
+    <ul class="trap-list" style="margin-top:10px">
+      <li>Agile PM is ALWAYS servant leader by default unless told otherwise</li>
+      <li>"Servant leader" does NOT mean being passive — it means enabling the team</li>
+      <li>Telling a senior expert what to do = micromanaging = wrong answer</li>
+    </ul>
+  </div>
+</details>
+
+<details>
+  <summary>Motivation Theories — Quick Reference</summary>
+  <div class="detail-body">
+    <div class="concept-grid">
+      <div class="concept-item">
+        <div class="label">Maslow's Hierarchy</div>
+        Physical → Safety → Social → Esteem → Self-actualization. Lowest unmet need dominates.
+      </div>
+      <div class="concept-item">
+        <div class="label">Herzberg Two-Factor</div>
+        Hygiene factors (salary, safety) prevent dissatisfaction. Motivators (recognition, achievement) drive satisfaction. Fixing hygiene ≠ motivation.
+      </div>
+      <div class="concept-item">
+        <div class="label">McGregor X/Y</div>
+        Theory X: people avoid work, need control. Theory Y: people are self-motivated. PMI prefers Y.
+      </div>
+      <div class="concept-item">
+        <div class="label">McClelland</div>
+        Achievement, Affiliation, Power. Most managers driven by power (institutional, not personal).
+      </div>
+      <div class="concept-item">
+        <div class="label">Expectancy Theory (Vroom)</div>
+        Motivation = Expectancy × Instrumentality × Valence. People work harder if they believe effort leads to reward they value.
+      </div>
+    </div>
+    <ul class="trap-list" style="margin-top:10px">
+      <li>Giving someone a raise (hygiene) doesn't motivate — it only removes dissatisfaction</li>
+      <li>"Give recognition" is almost always right for motivation questions</li>
+    </ul>
+  </div>
+</details>
+
+<details>
+  <summary>Agile Team Dynamics (Tuckman, Roles, Self-Organization)</summary>
+  <div class="detail-body">
+    <div class="concept-grid">
+      <div class="concept-item">
+        <div class="label">Tuckman Stages</div>
+        Forming → Storming → Norming → Performing → Adjourning. Conflict = Storming, normal and necessary.
+      </div>
+      <div class="concept-item">
+        <div class="label">Scrum Master vs PM</div>
+        SM is servant leader, coach, impediment remover. NOT a traditional PM. Does NOT assign tasks.
+      </div>
+      <div class="concept-item">
+        <div class="label">Self-Organizing Teams</div>
+        Team decides HOW to do work. PM/SM decides WHAT. Never assign tasks to individuals in agile.
+      </div>
+      <div class="concept-item">
+        <div class="label">Cross-Functional</div>
+        Team has all skills needed. No external dependencies for core work.
+      </div>
+      <div class="concept-item">
+        <div class="label">Team Charter</div>
+        Team creates their own working agreements. PM facilitates, doesn't dictate.
+      </div>
+      <div class="concept-item">
+        <div class="label">Retrospective Purpose</div>
+        Improve process. Blame-free. Team-led. Continuous improvement, not post-mortem.
+      </div>
+    </div>
+  </div>
+</details>
+
+<details>
+  <summary>🧠 Mini Practice Questions — Resource</summary>
+  <div class="detail-body">
+    <div class="mini-quiz" id="q1">
+      <div class="q">Q: Two team members are in a heated disagreement about the technical approach. The project manager should FIRST:</div>
+      <div class="options">
+        <div class="option" onclick="answer(this,'wrong','q1')">A. Escalate to the sponsor for a decision</div>
+        <div class="option" onclick="answer(this,'correct','q1')">B. Meet with both team members to facilitate a collaborative discussion</div>
+        <div class="option" onclick="answer(this,'wrong','q1')">C. Make the technical decision for them to keep the project moving</div>
+        <div class="option" onclick="answer(this,'wrong','q1')">D. Ask them to document their positions and vote</div>
+      </div>
+      <div class="explanation" id="q1-exp">Problem Solve / Collaborate is always the first technique. Escalating or forcing decisions skips the step of empowering the team.</div>
+    </div>
+
+    <div class="mini-quiz" id="q2" style="margin-top:10px">
+      <div class="q">Q: An experienced senior engineer seems disengaged and is delivering below his capability. The PM should:</div>
+      <div class="options">
+        <div class="option" onclick="answer(this,'wrong','q2')">A. Assign a mentor to coach him on task execution</div>
+        <div class="option" onclick="answer(this,'correct','q2')">B. Have a one-on-one to understand his concerns and involve him in decisions</div>
+        <div class="option" onclick="answer(this,'wrong','q2')">C. Document the performance issue and discuss at the next team meeting</div>
+        <div class="option" onclick="answer(this,'wrong','q2')">D. Provide more detailed task instructions</div>
+      </div>
+      <div class="explanation" id="q2-exp">High skill / low will = Supporting style. You involve them in decisions and address what's killing motivation. Coaching (A) is for low skill. Directing (D) is micromanaging an expert.</div>
+    </div>
+
+    <div class="mini-quiz" id="q3" style="margin-top:10px">
+      <div class="q">Q: In an agile project, a sprint has started. A team member asks the Scrum Master who they should work with first. The SM should:</div>
+      <div class="options">
+        <div class="option" onclick="answer(this,'wrong','q3')">A. Assign tasks based on skills to maximize velocity</div>
+        <div class="option" onclick="answer(this,'correct','q3')">B. Remind the team they are self-organizing and should pull work from the backlog</div>
+        <div class="option" onclick="answer(this,'wrong','q3')">C. Check the sprint plan and direct the team member accordingly</div>
+        <div class="option" onclick="answer(this,'wrong','q3')">D. Escalate to the Product Owner for prioritization</div>
+      </div>
+      <div class="explanation" id="q3-exp">Self-organizing teams pull work — they are not assigned. The SM's role is to remind and enable, not direct. PO prioritizes the backlog, not individual tasks.</div>
+    </div>
+  </div>
+</details>
+```
+
+  </div>
+
+  <!-- TOPIC 2: INTEGRATION -->
+
+  <div class="section-label">🟠 PRIORITY 2 — INTEGRATION (12 Misses · Agile/Hybrid/Predictive)</div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Integration Management — Change Control & Adaptive Approaches</div>
+      <span class="badge badge-orange">12 MISSES</span>
+      <span class="badge badge-teal">Agile + Hybrid</span>
+    </div>
+    <div class="stat-row">
+      <div class="stat">Qs: 14, 38, 43, 59, 85, 93, 94, 100, 111, 136, 147, 169, 179</div>
+    </div>
+
+```
+<details>
+  <summary>Change Control — Predictive vs Agile Approach</summary>
+  <div class="detail-body">
+    <div class="two-col">
+      <div>
+        <p style="font-size:0.82rem;color:var(--accent2);font-weight:700;margin-bottom:6px">PREDICTIVE — Formal CCB</p>
+        <ul class="key-list">
+          <li>All changes go through Change Control Board</li>
+          <li>Never implement changes without approval</li>
+          <li>PM submits change request, CCB decides</li>
+          <li>Approved → update baseline, plan, and docs</li>
+          <li>Corrective action = approved change</li>
+          <li>Emergency changes still need documentation after</li>
+        </ul>
+      </div>
+      <div>
+        <p style="font-size:0.82rem;color:var(--accent3);font-weight:700;margin-bottom:6px">AGILE — Embrace Change</p>
+        <ul class="key-list">
+          <li>Change welcomed via backlog refinement</li>
+          <li>PO reprioritizes — no formal CCB</li>
+          <li>Changes go INTO the backlog, not change requests</li>
+          <li>Team capacity is fixed; scope flexes</li>
+          <li>Sprint scope is frozen once sprint starts</li>
+          <li>Never change sprint scope mid-sprint (unless critical)</li>
+        </ul>
+      </div>
+    </div>
+    <ul class="trap-list" style="margin-top:12px">
+      <li>If predictive: NEVER approve your own changes as PM (CCB decides)</li>
+      <li>If agile: stakeholder requests go to PO, not directly to the team</li>
+      <li>Hybrid: use CCB for scope/budget baseline; agile backlog for feature changes</li>
+    </ul>
+  </div>
+</details>
+
+<details>
+  <summary>Project Charter & Initiating — What PM Does First</summary>
+  <div class="detail-body">
+    <div class="concept-grid">
+      <div class="concept-item">
+        <div class="label">Charter Purpose</div>
+        Formally authorizes the project. Gives PM authority. Signed by sponsor, not PM.
+      </div>
+      <div class="concept-item">
+        <div class="label">PM Authority</div>
+        Comes from the charter. Without it, PM has limited power over resources.
+      </div>
+      <div class="concept-item">
+        <div class="label">Lessons Learned</div>
+        Review historical lessons FIRST before planning. Apply them throughout, not just closeout.
+      </div>
+      <div class="concept-item">
+        <div class="label">Kickoff Meeting</div>
+        End of planning, beginning of execution. Align team on plan and objectives.
+      </div>
+      <div class="concept-item">
+        <div class="label">Integrated Change</div>
+        Every approved change must update ALL affected docs: scope, schedule, cost, risk.
+      </div>
+      <div class="concept-item">
+        <div class="label">Agile Integration</div>
+        PM acts as integrator across teams. Uses Scrum of Scrums for multi-team coordination.
+      </div>
+    </div>
+    <ul class="trap-list" style="margin-top:10px">
+      <li>If asked what to do FIRST on a new project: review OPA/EEF and lessons learned</li>
+      <li>Sponsor closes the project — not the PM (formally)</li>
+      <li>PM can make corrective action in execution, but must document it as a change</li>
+    </ul>
+  </div>
+</details>
+
+<details>
+  <summary>🧠 Mini Practice — Integration</summary>
+  <div class="detail-body">
+    <div class="mini-quiz" id="q4">
+      <div class="q">Q: A stakeholder requests a significant feature change during a sprint. As the Scrum Master, you should:</div>
+      <div class="options">
+        <div class="option" onclick="answer(this,'wrong','q4')">A. Add it to the current sprint if the team has capacity</div>
+        <div class="option" onclick="answer(this,'correct','q4')">B. Direct the stakeholder to the Product Owner to assess and add to the product backlog</div>
+        <div class="option" onclick="answer(this,'wrong','q4')">C. Submit a formal change request to the CCB</div>
+        <div class="option" onclick="answer(this,'wrong','q4')">D. Reject the change and ask them to wait for the next release</div>
+      </div>
+      <div class="explanation" id="q4-exp">In agile, all change requests flow through the Product Owner. Sprint scope is protected. The PO will prioritize it in the backlog for a future sprint.</div>
+    </div>
+  </div>
+</details>
+```
+
+  </div>
+
+  <!-- TOPIC 3: EVM COST -->
+
+  <div class="section-label">🟡 PRIORITY 3 — COST / EVM (8 Misses · Predictive M&C)</div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Earned Value Management — Formulas & Interpretation</div>
+      <span class="badge badge-yellow">8 MISSES</span>
+      <span class="badge badge-purple">Predictive</span>
+    </div>
+    <div class="stat-row">
+      <div class="stat">Qs: 18, 51, 61, 102, 143, 146, 155, 178</div>
+    </div>
+
+```
+<details open>
+  <summary>The Core EVM Formulas — Must Be Instant Recall</summary>
+  <div class="detail-body">
+    <div class="formula-box">
+      <div class="label">Variances (negative = BAD)</div>
+      CV = EV – AC &nbsp;&nbsp;&nbsp; SV = EV – PV
+    </div>
+    <div class="formula-box">
+      <div class="label">Indices (>1.0 = GOOD, &lt;1.0 = BAD)</div>
+      CPI = EV / AC &nbsp;&nbsp;&nbsp; SPI = EV / PV
+    </div>
+    <div class="formula-box">
+      <div class="label">EAC Variants (know which to use when)</div>
+      EAC = BAC / CPI &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ← if current variance is TYPICAL<br>
+      EAC = AC + (BAC – EV) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ← if variance is ATYPICAL (one-time)<br>
+      EAC = AC + [(BAC–EV)/(CPI×SPI)] &nbsp; ← if both cost AND schedule matter
+    </div>
+    <div class="formula-box">
+      <div class="label">ETC &amp; VAC</div>
+      ETC = EAC – AC &nbsp;&nbsp;&nbsp; VAC = BAC – EAC
+    </div>
+    <div class="formula-box">
+      <div class="label">TCPI (work efficiency needed going forward)</div>
+      TCPI = (BAC – EV) / (BAC – AC) &nbsp;&nbsp; ← to meet original budget<br>
+      TCPI = (BAC – EV) / (EAC – AC) &nbsp;&nbsp; ← to meet new EAC
+    </div>
+    <ul class="trap-list" style="margin-top:10px">
+      <li>TCPI > 1.0 means you must work MORE efficiently than you have been — often unrealistic</li>
+      <li>SPI can return to 1.0 near project end even if you were late (misleading)</li>
+      <li>EV is always "the budgeted cost of work performed" — not what you actually spent</li>
+      <li>If the question says variance is "atypical" use EAC = AC + (BAC-EV)</li>
+    </ul>
+  </div>
+</details>
+
+<details>
+  <summary>Reading EVM Situations Fast</summary>
+  <div class="detail-body">
+    <div class="concept-grid">
+      <div class="concept-item">
+        <div class="label">Over budget, on schedule</div>
+        CV &lt; 0, SV = 0. CPI &lt; 1, SPI = 1. Spending too much per unit of work.
+      </div>
+      <div class="concept-item">
+        <div class="label">Under budget, behind schedule</div>
+        CV > 0, SV &lt; 0. CPI > 1, SPI &lt; 1. Doing less work than planned but cheaply.
+      </div>
+      <div class="concept-item">
+        <div class="label">Best position</div>
+        CV > 0 AND SV > 0. Under budget AND ahead of schedule.
+      </div>
+      <div class="concept-item">
+        <div class="label">Worst position</div>
+        CV &lt; 0 AND SV &lt; 0. Over budget AND behind schedule.
+      </div>
+    </div>
+  </div>
+</details>
+
+<details>
+  <summary>🧠 Mini Practice — EVM</summary>
+  <div class="detail-body">
+    <div class="mini-quiz" id="q5">
+      <div class="q">Q: PV=$500K, EV=$400K, AC=$480K. The project is:</div>
+      <div class="options">
+        <div class="option" onclick="answer(this,'correct','q5')">A. Behind schedule and over budget</div>
+        <div class="option" onclick="answer(this,'wrong','q5')">B. Ahead of schedule and under budget</div>
+        <div class="option" onclick="answer(this,'wrong','q5')">C. Behind schedule and under budget</div>
+        <div class="option" onclick="answer(this,'wrong','q5')">D. On schedule and over budget</div>
+      </div>
+      <div class="explanation" id="q5-exp">SV = EV-PV = 400-500 = -100 (behind schedule). CV = EV-AC = 400-480 = -80 (over budget). Both negative = worst quadrant.</div>
+    </div>
+
+    <div class="mini-quiz" id="q6" style="margin-top:10px">
+      <div class="q">Q: BAC=$1M, EV=$600K, AC=$700K. The cost overrun was due to a one-time equipment failure. EAC = ?</div>
+      <div class="options">
+        <div class="option" onclick="answer(this,'wrong','q6')">A. $1,166,667 (BAC/CPI)</div>
+        <div class="option" onclick="answer(this,'correct','q6')">B. $1,100,000 (AC + BAC – EV)</div>
+        <div class="option" onclick="answer(this,'wrong','q6')">C. $700,000</div>
+        <div class="option" onclick="answer(this,'wrong','q6')">D. $1,400,000</div>
+      </div>
+      <div class="explanation" id="q6-exp">"One-time" / "atypical" variance → use EAC = AC + (BAC–EV) = 700K + (1M–600K) = 700K + 400K = $1.1M. The keyword "atypical" always flags this formula.</div>
+    </div>
+  </div>
+</details>
+```
+
+  </div>
+
+  <!-- TOPIC 4: AGILE SCHEDULE & SCOPE -->
+
+  <div class="section-label">🔵 PRIORITY 4 — AGILE SCHEDULE & SCOPE (7 Misses)</div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Agile Planning — Iteration, Velocity, Backlog</div>
+      <span class="badge badge-blue">7 MISSES</span>
+      <span class="badge badge-teal">Agile</span>
+    </div>
+    <div class="stat-row">
+      <div class="stat">Qs: 32, 40, 82, 142, 150, 156, 180</div>
+    </div>
+
+```
+<details>
+  <summary>Agile Scheduling Concepts</summary>
+  <div class="detail-body">
+    <div class="concept-grid">
+      <div class="concept-item">
+        <div class="label">Velocity</div>
+        Story points completed per sprint. Based on historical data. NOT a commitment — a forecast.
+      </div>
+      <div class="concept-item">
+        <div class="label">Release Planning</div>
+        Total backlog story points ÷ velocity = sprints needed. Always an estimate.
+      </div>
+      <div class="concept-item">
+        <div class="label">Definition of Done</div>
+        Team-agreed criteria for "complete." Prevents scope creep within a story. Consistent across team.
+      </div>
+      <div class="concept-item">
+        <div class="label">Definition of Ready</div>
+        Story is sufficiently defined to begin. INVEST criteria: Independent, Negotiable, Valuable, Estimable, Small, Testable.
+      </div>
+      <div class="concept-item">
+        <div class="label">Burndown Chart</div>
+        Remaining work vs. time. Going DOWN is good. Flat line = blocked. Going up = scope added.
+      </div>
+      <div class="concept-item">
+        <div class="label">Burnup Chart</div>
+        Work completed vs. total. Shows both progress AND scope changes. Better for communicating scope creep.
+      </div>
+    </div>
+    <ul class="trap-list" style="margin-top:10px">
+      <li>If velocity drops: first inspect WHY in the retrospective, then adjust the plan</li>
+      <li>Never commit to delivering specific stories until sprint planning is done with the team</li>
+      <li>Scope in agile is flexible — but you never add to a sprint mid-sprint without removing something</li>
+    </ul>
+  </div>
+</details>
+
+<details>
+  <summary>Agile Scope Control (M&C)</summary>
+  <div class="detail-body">
+    <ul class="key-list">
+      <li>Scope validation = stakeholder acceptance. In agile, this happens every sprint review.</li>
+      <li>If a stakeholder says delivered work doesn't meet expectations at sprint review → refine and add to backlog, don't fail the sprint</li>
+      <li>Product backlog is NEVER complete — it evolves continuously</li>
+      <li>Backlog refinement / grooming happens continuously (not just at sprint start)</li>
+      <li>Scope baseline in agile = the product vision + prioritized backlog (not a fixed WBS)</li>
+    </ul>
+  </div>
+</details>
+```
+
+  </div>
+
+  <!-- TOPIC 5: COMMUNICATIONS & PROCUREMENT -->
+
+  <div class="section-label">🟢 PRIORITY 5 — COMMUNICATIONS & PROCUREMENT (4 Misses Each)</div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Communications</div>
+        <span class="badge badge-green">4 MISSES</span>
+      </div>
+      <div class="stat-row"><div class="stat">Qs: 26, 30, 62, 141</div></div>
+      <details>
+        <summary>Key Concepts</summary>
+        <div class="detail-body">
+          <div class="formula-box">
+            <div class="label">Communication Channels</div>
+            n(n-1)/2 &nbsp;where n = number of people
+          </div>
+          <ul class="key-list">
+            <li>Communication models: Sender → Encode → Message → Channel → Decode → Receiver → Feedback</li>
+            <li>Noise can corrupt any step. PM's job: confirm receipt AND understanding</li>
+            <li>Most communication problems = PM not communicating proactively</li>
+            <li>Formal written: contractual changes, legal issues, scope changes</li>
+            <li>Informal verbal: day-to-day team coordination</li>
+            <li>In agile: face-to-face is preferred (information radiators, standups)</li>
+            <li>Communications management plan: who gets what info, when, in what format</li>
+          </ul>
+          <ul class="trap-list" style="margin-top:8px">
+            <li>If a stakeholder says they "didn't know" about something → PM failed to communicate, even if it was in a report</li>
+            <li>55% nonverbal, 38% tone, 7% words (Mehrabian) — PMP loves to test this</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+
+```
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">Procurement</div>
+    <span class="badge badge-green">4 MISSES</span>
+  </div>
+  <div class="stat-row"><div class="stat">Qs: 67, 124, 126, 153</div></div>
+  <details>
+    <summary>Key Concepts</summary>
+    <div class="detail-body">
+      <div class="concept-grid">
+        <div class="concept-item">
+          <div class="label">FFP (Firm Fixed Price)</div>
+          Seller bears cost risk. Best when scope is well-defined.
+        </div>
+        <div class="concept-item">
+          <div class="label">CPFF (Cost Plus Fixed Fee)</div>
+          Buyer bears cost risk. Seller gets costs + fixed fee. Good for uncertain scope.
+        </div>
+        <div class="concept-item">
+          <div class="label">T&M (Time & Material)</div>
+          Hybrid. Buyer bears risk of efficiency. Good for staff augmentation. Must include not-to-exceed clause.
+        </div>
+        <div class="concept-item">
+          <div class="label">CPIF (Cost Plus Incentive Fee)</div>
+          Buyer bears risk but incentivizes seller to control costs. Shared savings.
+        </div>
+      </div>
+      <ul class="trap-list" style="margin-top:10px">
+        <li>Changes to a contract must ALWAYS be in writing — verbal agreements don't count</li>
+        <li>Contract disputes → negotiate first, then ADR (mediation/arbitration), then litigation</li>
+        <li>Centralized procurement: PM shares contractor with PMO. Decentralized: PM fully controls contractor.</li>
+        <li>Contract closeout comes BEFORE administrative closeout</li>
+      </ul>
+    </div>
+  </details>
+</div>
+```
+
+  </div>
+
+  <!-- 2-DAY PLAN -->
+
+  <div class="section-label">📅 48-HOUR GAME PLAN (Tonight + Tomorrow)</div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Tonight (Sunday) — People & Resource Focus</div>
+      <span class="badge badge-red">HIGH PRIORITY</span>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-time">1 hr</div>
+        <div class="timeline-content">
+          <strong>Resource deep dive</strong>
+          <p>Conflict resolution hierarchy · leadership styles · motivation theories. Make flashcards for Herzberg, Maslow, McGregor.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">45 min</div>
+        <div class="timeline-content">
+          <strong>Agile team dynamics</strong>
+          <p>Self-organizing teams · servant leader vs PM · Tuckman · retrospective vs review vs standup purposes.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">30 min</div>
+        <div class="timeline-content">
+          <strong>EVM cold practice</strong>
+          <p>Do 10 EVM calculations from scratch. Focus on: which EAC formula to use and why. Check TCPI interpretation.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">30 min</div>
+        <div class="timeline-content">
+          <strong>Integration: change control</strong>
+          <p>Predictive CCB process vs agile backlog flow. Hybrid scenarios. Read pages 29, 45, 52, 84, 87.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Tomorrow (Monday) — Process & Light Review</div>
+      <span class="badge badge-orange">EXAM EVE</span>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-time">1 hr</div>
+        <div class="timeline-content">
+          <strong>Full mock set — 30 Qs only</strong>
+          <p>Focus on situational questions. For each wrong answer: identify if you chose "what's technically right" vs "what PM does first."</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">30 min</div>
+        <div class="timeline-content">
+          <strong>Communications + Procurement sweep</strong>
+          <p>Contract types risk allocation · contract changes must be written · dispute resolution order · comms channels formula.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">30 min</div>
+        <div class="timeline-content">
+          <strong>Agile ceremonies and artifacts review</strong>
+          <p>Who attends what · sprint review vs retrospective · PO vs SM vs Dev Team responsibilities.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">STOP</div>
+        <div class="timeline-content">
+          <strong>No new material after 8 PM</strong>
+          <p>Sleep matters more than cramming at this point. Light review of your flashcards max.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXAM DAY MINDSET -->
+
+  <div class="card" style="border-color: var(--accent3)">
+    <div class="card-header">
+      <div class="card-title">🎯 Exam Day Decision Framework</div>
+      <span class="badge badge-teal">Apply to Every Question</span>
+    </div>
+    <p style="font-size:0.87rem;color:var(--muted);margin-bottom:12px">When stuck, run this mental checklist:</p>
+    <ul class="key-list">
+      <li><strong style="color:var(--text)">Does it involve people?</strong> → Prefer collaborate, support, and empathize over authority or escalation</li>
+      <li><strong style="color:var(--text)">Is it agile?</strong> → PO owns scope decisions. Team self-organizes. SM removes impediments.</li>
+      <li><strong style="color:var(--text)">Is it predictive?</strong> → Follow the process. CCB for changes. Document everything.</li>
+      <li><strong style="color:var(--text)">What do you do FIRST?</strong> → Usually: assess the situation, then communicate, then plan the response</li>
+      <li><strong style="color:var(--text)">Who should make this decision?</strong> → Lowest possible level. Don't escalate what can be resolved at team level.</li>
+      <li><strong style="color:var(--text)">Is it proactive or reactive?</strong> → PMI ALWAYS prefers proactive. If an answer prevents a problem vs fixes one, pick prevent.</li>
+      <li><strong style="color:var(--text)">EVM question?</strong> → Write out EV, PV, AC before doing any math. One number wrong cascades.</li>
+    </ul>
+  </div>
+
+</main>
+
+<script>
+function answer(el, result, qid) {
+  const quiz = document.getElementById(qid);
+  const opts = quiz.querySelectorAll('.option');
+  const exp = document.getElementById(qid + '-exp');
+  opts.forEach(o => {
+    o.onclick = null;
+    o.style.cursor = 'default';
+  });
+  el.classList.add(result);
+  exp.style.display = 'block';
+}
+</script>
+
+</body>
+</html>
